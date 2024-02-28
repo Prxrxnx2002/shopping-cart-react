@@ -26,4 +26,11 @@ img{
     padding: 0 10px;
   }
 }
+
+.btn-container{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
 `;

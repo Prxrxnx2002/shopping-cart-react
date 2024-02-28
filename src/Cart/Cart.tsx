@@ -9,6 +9,10 @@ type CartProps = {
 }
 
 export const Cart = ({cartItems, handleAddToCart, handleRemoveFromCart}: CartProps) => {
+  const calcTotal = (items: CartItemType[]) => {
+    return items.reduce((acc, item) => acc + item.price * item.amount, 0);
+  }
+
   return (
     <Container>
     <h2>Your Shopping Cart</h2>
@@ -23,6 +27,7 @@ export const Cart = ({cartItems, handleAddToCart, handleRemoveFromCart}: CartPro
         />
       )
     })}
+    <h3>Total: ${calcTotal(cartItems)}</h3>
     </Container>
   );
 }
