@@ -9,6 +9,7 @@ width: 100%;
 height: 100%;
 border: 1px solid #ccc;
 border-radius: 10px;
+padding: 0 10px;
 
 button {
   border-radius: 10px;
@@ -28,6 +29,6 @@ div{
 .btn-container{
   display: flex;
   width: 100%;
-  justify-content: center;
+  justify-content: flex-end;
 }
 `;
