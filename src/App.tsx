@@ -30,11 +30,26 @@ function App() {
   }
 
   const handleAddToCart = (item: CartItemType) => {
-    return null;
+    const items = [...cartItems];
+    if(items.find(i => i.id === item.id)) {
+      const index = items.findIndex(i => i.id === item.id);
+      items[index].amount++;
+    }else{
+      items.push({...item, amount: 1});
+    }
+    setCartItems(items);
   }
 
   const handleRemoveFromCart =(item : CartItemType) => {
-    return null;
+    const items = [...cartItems];
+    const index = items.findIndex(i => i.id === item.id);
+    if(index === -1) return;
+    if(items[index].amount === 1) {
+      items.splice(index, 1);
+    }else{
+      items[index].amount--;
+    }
+    setCartItems(items);
   }
 
   if(isLoading) return <LinearProgress></LinearProgress>;
@@ -48,7 +63,7 @@ function App() {
   return (
     <Container>
       <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
-        <Cart></Cart>
+        <Cart cartItems={cartItems} handleAddToCart={handleAddToCart} handleRemoveFromCart={handleRemoveFromCart}></Cart>
       </Drawer>
       <StyledButton onClick={() => setCartOpen(true)}><Badge badgeContent={totalItems} color="error"><AddShoppingCart></AddShoppingCart></Badge></StyledButton>
       <Grid container spacing={3}>
