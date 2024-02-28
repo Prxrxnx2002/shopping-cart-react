@@ -28,5 +28,6 @@ div{
 .btn-container{
   display: flex;
   width: 100%;
+  justify-content: center;
 }
 `;
