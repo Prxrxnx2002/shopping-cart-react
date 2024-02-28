@@ -16,14 +16,18 @@ export type CartItemType = {
   amount: number;
 }
 
-const getProducts = async (): Promise<CartItemType[]> => await (await fetch('https://fakestoreapi.com/products')).json();
+const getProducts = async (): Promise<CartItemType[]> => {
+  return await (await fetch('https://fakestoreapi.com/products')).json();
+}
 
 function App() {
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState<CartItemType[]>([]);
   const totalItems = cartItems.reduce((acc, item) => acc + item.amount, 0);
 
-  const { data, isLoading, error } = useQuery<CartItemType[]>('products', getProducts);
+  const { data, isLoading, error } = useQuery<CartItemType[]>('products', getProducts,{
+    refetchOnWindowFocus: false,
+  });
 
   const getTotalItems = () => {
     return null;
@@ -55,10 +59,6 @@ function App() {
   if(isLoading) return <LinearProgress></LinearProgress>;
 
   if(error) return <div>Something went wrong...</div>
-
-  if(data){
-    console.log(data);
-  }
 
   return (
     <Container>
